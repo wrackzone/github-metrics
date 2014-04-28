@@ -90,6 +90,7 @@ GithubIssueProcessor.prototype.process = function(job, callback) {
 			if (err) {
 				console.log("Error:",JSON.stringify(err));
 			}
+			console.log("Wrote mongo id:",docs["_id"]);
 			callback();
 		});
 	});
