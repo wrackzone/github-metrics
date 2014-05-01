@@ -1,0 +1,25 @@
+curl -H "Content-Type: application/json" -X POST -d '{"title":"blah blah blah"}' http://localhost:3000/items
+
+
+curl -H "Content-Type: application/json" -X PUT -d '{"title":"Good Golly Miss Molly"}' http://localhost:3000/items/{_id}
+
+
+535c5f8bb546738cfae18481
+
+curl -H "Content-Type: application/json" -X DELETE  http://localhost:3000/items/535c5f8bb546738cfae18481
+
+
+put
+
+curl -H "Content-Type: application/json" -X POST -d ' { "fullName":"wrackzone/psi-feature-burnup", "data":[]}' http://localhost:3000/chartdata/wrackzone/psi-feature-burnup
+
+
+curl -H "Content-Type: application/json" -X POST -d ' { "fullName":"wrackzone/psi-feature-burnup"}' http://localhost:3000/queue/enqueue
+
+curl -H "Content-Type: application/json" -X POST -d ' { "account" : "wrackzone", "repo" : "psi-feature-burnup", "fullName":"wrackzone/psi-feature-burnup"}' http://localhost:3000/queue/enqueue
+
+curl -H "Content-Type: application/json" -X POST -d ' { "account" : "wrackzone", "repo" : "initiative-burnup-chart", "fullName":"wrackzone/initiative-burnup-chart"}' http://localhost:3000/queue/enqueue
+
+curl -H "Content-Type: application/json" -X POST -d ' { "accountName" : "mbostock", "repo" : "d3", "fullName":"mbostock/d3"}' http://localhost:3000/queue/enqueue
+
+curl -H "Content-Type: application/json" -X POST -d ' { "accountName" : "wrackzone", "repoName" : "initiative-burnup-chart", "fullName":"wrackzone/initiative-burnup-chart"}' http://localhost:3000/queue/enqueue

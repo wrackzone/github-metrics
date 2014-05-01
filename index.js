@@ -7,6 +7,8 @@ var http = require('http'),
     kue = require("kue"),
     cluster = require('cluster');
 
+
+
 cluster.on('online',function(worker) {
 	console.log('Worker ' + worker.process.pid + ' is online.');
 });
@@ -255,12 +257,20 @@ if (cluster.isMaster) {
 		GithubIssueProcessor = require('./githubIssueProcessor').GithubIssueProcessor;
 
 		
-		var githubIssueProcessor = new GithubIssueProcessor( collectionDriver , client );
+		var githubIssueProcessor = new GithubIssueProcessor( client );
 
 		setInterval(function() { 
 			jobs.process('chartdata', function(job, done){
 				console.log("Processing Job:",job.id);
-	  			githubIssueProcessor.process(job, done);
+	  			githubIssueProcessor.process(job, function(obj) {
+					collectionDriver.save("chartdata", obj, function(err,docs) {
+						if (err) {
+							console.log("Error:",JSON.stringify(err));
+						}
+						console.log("Wrote mongo id:",docs["_id"]);
+						done();
+					});
+	  			});
 	  		});
 		}, 5000);
 
